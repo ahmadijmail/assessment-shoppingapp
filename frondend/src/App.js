@@ -1,23 +1,24 @@
+import "./App.scss";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import './App.css';
-import {BrowserRouter, Route, Routes, Redirect} from "react-router-dom"
-
-import Home from './components/Home';
-import NavBar from './components/NavBar';
-import Cart from './components/Cart';
+import 'react-toastify/dist/ReactToastify.css'
+import {ToastContainer} from 'react-toastify'
+import Home from "./components/Home/Home";
+import NavBar from "./components/NavBar/NavBar";
+import Cart from "./components/Cart/Cart";
+import Notfound from "./components/PageNotFound/Notfound";
 function App() {
   return (
-   <div className='App'>
-  <BrowserRouter>
-  <NavBar/>
-  <Routes>
-
-<Route path="/" element={<Home />}/>
-<Route path="/cart" element={<Cart />}/>
-  </Routes>
-  
-  </BrowserRouter>
-   </div>
+    <div className="App">
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<Notfound />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
