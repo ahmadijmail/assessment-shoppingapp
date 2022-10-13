@@ -1,7 +1,12 @@
 import React from "react";
 import './NavBar.scss'
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+
 function NavBar() {
+  const numberofItems = useSelector((state) => state.cart.carttotalquantity);
+  console.log(numberofItems, "cartfromnav");
   return (
     <nav className="navbar">
       <Link to="/"> 
@@ -22,7 +27,7 @@ function NavBar() {
         </svg>
 
         <span className="itemsinCartNum-nav">
-            <span>3</span>
+            <span>{numberofItems}</span>
         </span>
       </div>
       </Link>

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 
 import { productsFetch } from "../../store/productSlices";
 import { useSelector, useDispatch } from "react-redux";
