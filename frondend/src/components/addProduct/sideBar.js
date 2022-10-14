@@ -4,9 +4,6 @@ import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state.auth);
-
-  //   if (!auth.isAdmin) return <p>Access denied. Not an Admin!</p>;
-
   return (
     <StyledDashboard>
       <SideNav>
@@ -39,15 +36,15 @@ export default Dashboard;
 
 const StyledDashboard = styled.div`
   display: flex;
-  height: 100vh;
+  
 `;
 
 const SideNav = styled.div`
   border-right: 1px solid gray;
-  height: 100px
+  height: calc(100vh - 70px);
   position: fixed;
   overflow-y: auto;
-  width: 250px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   padding: 2rem;

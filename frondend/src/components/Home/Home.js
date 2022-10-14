@@ -14,9 +14,9 @@ const Home = () => {
     dispatch(cartActions.addtoCart(product));
   };
 
-  useEffect(() => {
-    dispatch(productsFetch());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(productsFetch());
+  // }, []);
   //console.log(datas);
   return (
     <>

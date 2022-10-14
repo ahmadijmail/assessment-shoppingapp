@@ -11,8 +11,8 @@ router.post("/", async (req, res) => {
       const uploadres = await cloudinary.uploader.upload(image, {
         upload_preset: "liwdvkxq",
       });
-           console.log(uploadres, "imgglinkk");
-      
+      console.log(uploadres, "imgglinkk");
+
       if (uploadres) {
         const newproduct = new Product({
           name,
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
           price,
           userid,
         });
-         console.log(newproduct);
+        console.log(newproduct);
         const response = await newproduct.save();
         res.status(200).send(response);
       }
@@ -31,6 +31,72 @@ router.post("/", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+router.put("/:id", async (req, res) => {
+  const { name, description, image, price } = req.body;
+  console.log(req.body);
+  try {
+    if (image) {
+      const uploadres = await cloudinary.uploader.upload(image, {
+        upload_preset: "liwdvkxq",
+      });
+      console.log(uploadres, "imgglinkk");
+
+      if (uploadres) {
+        let itemId = req.params.id;
+        Product.findByIdAndUpdate(
+          { _id: itemId },
+          {
+            name: name,
+            description: description,
+            image: uploadres,
+            price: price,
+          },
+          { new: true },
+          (error, data) => {
+            if (error) {
+              res.send(error);
+            } else {
+              console.log(data);
+              res.send("updated");
+            }
+          }
+        );
+        //res.status(200).send(response);
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+  
+});
+
+router.delete("/:id", async (req, res) => {
+  const { name, description, image, price } = req.body;
+  console.log(req.body);
+ 
+        let itemId = req.params.id;
+        Product.deleteOne(
+          { _id: itemId },
+     
+        (error, data) => {
+          if (error) {
+            res.send(error);
+          } else {
+            console.log(data);
+            res.send("updated");
+          }
+        }
+        )
+
+    
+ 
+    
+
+  
+});
+
 
 router.get("/", async (req, res) => {
   try {

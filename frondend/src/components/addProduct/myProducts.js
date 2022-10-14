@@ -1,44 +1,54 @@
-
 import React, { useEffect, useState } from "react";
 import { productsFetch } from "../../store/productSlices";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../store/cartSlice";
-const MyProducts = () => {
-    const dispatch = useDispatch();
-    const datas = useSelector((data) => data.products.items);
-    const auth = useSelector((data) => data.auth);
-  
-    const handelAddtoCart = (product) => {
-      dispatch(cartActions.addtoCart(product));
-    };
-  
-    useEffect(() => {
-      dispatch(productsFetch());
-    }, []);
-    //console.log(datas);
-    return (
-      <>
-        <div className="products">
-          {datas?.map((product) => (
-            <div key={product.id} className="product">
-              <h3>{product.name}</h3>
-              <img
-                src={product.image.url}
-                alt={product.name}
-                style={{ height: "150px", width: "150px" }}
-              />
-              <div className="details">
-                <span>{product.description}</span>
-                <span className="price">${product.price}</span>
-              </div>
-              <button onClick={() => handelAddtoCart(product)}>
-               Edit Product
-              </button>
-            </div>
-          ))}
-        </div>
-      </>
-    );
-}
+import { editProduct } from "../../store/productSlices";
+import { Link } from "react-router-dom";
+import { deleteProduct } from "../../store/productSlices";
 
-export default MyProducts
+import "./myproducts.scss";
+const MyProducts = () => {
+  const dispatch = useDispatch();
+  const datas = useSelector((data) => data.products.items);
+  const auth = useSelector((data) => data.auth);
+  const filtered = datas.filter((data) => data.userid == auth.id);
+  
+  const handelEditItem = (product) => {
+    dispatch(editProduct(product));
+  };
+
+//   useEffect(() => {
+//     dispatch(productsFetch());
+//   }, []);
+//   console.log(datas);
+  return (
+    <>
+      <div className="myproducts">
+        {filtered?.map((product) => (
+          <div key={product._id} className="myproductsB">
+            <h3>{product.name}</h3>
+            <img
+              src={product.image.url}
+              alt={product.name}
+              style={{ height: "150px", width: "150px" }}
+            />
+            <div className="details">
+              <span>{product.description}</span>
+              <span className="price">${product.price}</span>
+            </div>
+            <div className="buttons">
+            <Link to={`/addproduct/${product._id}`}>
+              <button >
+                Edit Product
+              </button>
+              </Link>
+              <button id="deletB" onClick={()=>dispatch(deleteProduct(product._id)) }>Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default MyProducts;

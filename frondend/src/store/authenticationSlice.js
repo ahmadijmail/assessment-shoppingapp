@@ -28,26 +28,21 @@ export const loginUser = createAsyncThunk(
   "authentication/loginUser",
   async (userInput, { rejectWithValue }) => {
     try {
-      const TokenFromApi = await axios.post(
-        "http://localhost:5000/api/login",
-        {
-          email: userInput.email,
-          password: userInput.password,
-        }
-      );
-      console.log(TokenFromApi.data, "tokkk");
+      const TokenFromApi = await axios.post("http://localhost:5000/api/login", {
+        email: userInput.email,
+        password: userInput.password,
+      });
+
       localStorage.setItem("token", TokenFromApi.data);
       return TokenFromApi;
     } catch (e) {
       console.log(e.response.data);
       return rejectWithValue(e.response.data);
     }
-
   }
 );
 
 const authenticationSlices = createSlice({
-
   name: "authentication",
   initialState: {
     token: localStorage.getItem("token"),
@@ -60,10 +55,10 @@ const authenticationSlices = createSlice({
   },
 
   reducers: {
-    loadUserData(state,action){
-      const token=state.token
-      console.log(token);
-      if(token){
+    loadUserData(state, action) {
+      const token = state.token;
+
+      if (token) {
         let decoded = jwtDecode(token);
 
         return {
@@ -75,23 +70,19 @@ const authenticationSlices = createSlice({
         };
       }
     },
-    Logout(state,action){
-      localStorage.removeItem("token")
-      state.id=''
-    }
-
-    
+    Logout(state, action) {
+      localStorage.removeItem("token");
+      state.id = "";
+    },
   },
   extraReducers: {
-
-
     ////register
     [registerUser.pending]: (state, action) => {
       state.registerStatus = "pending";
     },
     [registerUser.fulfilled]: (state, action) => {
       let token = action.payload.data;
-      console.log(token, "decodedd");
+
       if (token) {
         let decoded = jwtDecode(token);
 
@@ -112,11 +103,10 @@ const authenticationSlices = createSlice({
       };
     },
 
-
     ///login
 
     [loginUser.pending]: (state, action) => {
-      return {...state, LoginStatus : "pending"}
+      return { ...state, LoginStatus: "pending" };
     },
     [loginUser.fulfilled]: (state, action) => {
       let token = action.payload.data;

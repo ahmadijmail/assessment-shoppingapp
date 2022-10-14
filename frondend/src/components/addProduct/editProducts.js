@@ -1,24 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { productsFetch } from "../../store/productSlices";
+import { authactions } from "../../store/authenticationSlice";
 
-import { addProduct } from "../../store/productSlices";
+import { editProduct } from "../../store/productSlices";
 
-const AddProduct = () => {
+const EditProduct = () => {
+  let { id } = useParams();
+
   const loginStatus = useSelector((state) => state.auth);
-
+  const datas = useSelector((data) => data.products.items);
+  const filtered = datas.filter((data) => data._id == id);
+console.log(filtered);
   const dispatch = useDispatch();
-  const [productImg, setProductImg] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDesc] = useState("");
+
+  const [productImg, setProductImg] = useState(filtered[0]?.image.url);
+  const [name, setName] = useState(filtered[0]?.name);
+  const [price, setPrice] = useState(filtered[0]?.price);
+  const [description, setDesc] = useState(filtered[0]?.description);
 
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
 
     TransformFileData(file);
   };
+
 
   const TransformFileData = (file) => {
     const reader = new FileReader();
@@ -37,11 +46,12 @@ const AddProduct = () => {
     e.preventDefault();
 
     dispatch(
-      addProduct({
+        editProduct({
         name,
         description,
         price,
         image: productImg,
+        id:id,
         userid: loginStatus.id,
       })
     );
@@ -51,7 +61,7 @@ const AddProduct = () => {
     <>
       <StyledCreateProduct>
         <StyledForm onSubmit={handleSubmit}>
-          <h3>Create a Product</h3>
+          <h3>Edit Product</h3>
           <input
             id="imgUpload"
             accept="image/*"
@@ -63,25 +73,25 @@ const AddProduct = () => {
           <input
             type="text"
             placeholder="Name"
+            value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
           <input
             type="number"
             placeholder="Price"
+            value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
           />
           <input
             type="text"
             placeholder="Short Description"
+            value={description}
             onChange={(e) => setDesc(e.target.value)}
             required
           />
-          <button>submit</button>
-          {/* <PrimaryButton type="submit">
-          {createStatus === "pending" ? "Submitting" : "Submit"}
-        </PrimaryButton> */}
+          <button>Update</button>
         </StyledForm>
         <ImagePreview>
           {productImg ? (
@@ -97,7 +107,7 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
 
 const StyledForm = styled.form`
   display: flex;

@@ -9,7 +9,7 @@ const cartSlice = createSlice({
     : [],
     carttotalquantity: localStorage.getItem("cartnumbers")
     ? JSON.parse(localStorage.getItem("cartnumbers"))
-    : 0,
+    : [],
     totalPrices: 0,
   },
 
@@ -30,10 +30,12 @@ const cartSlice = createSlice({
         let existadd = { ...action.payload, CartQuantity: 1, totalprice:action.payload.price };
         state.cartlist.push(existadd);
         toast.success(`${action.payload.name} Added To Cart`,{ position:"bottom-left"})
+        state.carttotalquantity++;
+        state.totalPrices += newItem.price;
       }
-      state.carttotalquantity++;
-      state.totalPrices += newItem.price;
-      localStorage.setItem("cartItems", JSON.stringify(state.cartlist));
+     
+      localStorage.setItem("cartItems", JSON.stringify(state.cartlist ));
+      
       localStorage.setItem("cartnumbers", JSON.stringify(state.carttotalquantity));
     },
   },
