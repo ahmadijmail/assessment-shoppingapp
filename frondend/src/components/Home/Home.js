@@ -25,7 +25,7 @@ const Home = () => {
           <div key={product.id} className="product">
             <h3>{product.name}</h3>
             <img
-              src={product.image}
+              src={product.image.url}
               alt={product.name}
               style={{ height: "150px", width: "150px" }}
             />

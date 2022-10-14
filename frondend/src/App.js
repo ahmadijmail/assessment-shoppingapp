@@ -10,8 +10,10 @@ import Notfound from "./components/PageNotFound/Notfound";
 import Register from "./components/authentication/register";
 import {authactions} from "./store/authenticationSlice";
 import {  useDispatch } from "react-redux";
-
+import AddProduct from "./components/addProduct/addProduct";
 import Login from "./components/authentication/login";
+import MyProducts from "./components/addProduct/myProducts";
+import Dashboard from "./components/addProduct/sideBar";
 function App() {
   const dispatch = useDispatch();
 
@@ -27,6 +29,10 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/addproduct" element={<Dashboard/>}>
+          <Route path="add" element={<AddProduct/>} />
+          <Route path="myproducts" element={<MyProducts/>} />
+            </Route>
           <Route path="*" element={<Notfound />} />
         </Routes>
       </BrowserRouter>

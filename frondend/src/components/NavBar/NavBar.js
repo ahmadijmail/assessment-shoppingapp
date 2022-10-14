@@ -1,29 +1,26 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./NavBar.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { authactions } from "../../store/authenticationSlice";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
   const numberofItems = useSelector((state) => state.cart.carttotalquantity);
   const loginStatus = useSelector((state) => state.auth);
   let dispatch = useDispatch();
-  let navigate= useNavigate()
-
+  let navigate = useNavigate();
 
   const handelLogOut = () => {
     dispatch(authactions.Logout());
   };
 
-
-  useEffect(()=>{
-    if(!loginStatus.token){
-        navigate('/')
+  useEffect(() => {
+    if (!loginStatus.token) {
+      navigate("/");
     }
-  }, [loginStatus.id])
-
+  }, [loginStatus.id]);
 
   return (
     <nav className="navbar">
@@ -50,7 +47,10 @@ function NavBar() {
       </Link>
 
       {loginStatus?.id ? (
-        <Logout onClick={handelLogOut}>Logout</Logout>
+        <Routing>
+          <Link to="/addproduct">Sell</Link>
+          <div onClick={handelLogOut}>Logout</div>
+        </Routing>
       ) : (
         <AuthLi>
           <Link to="/login">Login</Link>
@@ -71,7 +71,19 @@ const AuthLi = styled.div`
   }
 `;
 
-const Logout = styled.div`
+const Logout = styled.button`
+  background-color: Transparent;
   color: white;
   cusror: pointer;
+`;
+
+const Routing = styled.div`
+  color: white;
+  display: flex;
+  div {
+    cursor: pointer;
+    &:last-child {
+      margin-left: 2rem;
+    }
+  }
 `;
