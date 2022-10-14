@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-
 import { productsFetch } from "../../store/productSlices";
 import { useSelector, useDispatch } from "react-redux";
-import {cartActions } from "../../store/cartSlice"
+import { cartActions } from "../../store/cartSlice";
+
+
 import "./home.scss";
 const Home = () => {
   const dispatch = useDispatch();
   const datas = useSelector((data) => data.products.items);
+  const auth = useSelector((data) => data.auth);
 
-  const handelAddtoCart = (product)=>{
-    dispatch(cartActions.addtoCart(product))
-}
+  const handelAddtoCart = (product) => {
+    dispatch(cartActions.addtoCart(product));
+  };
+
   useEffect(() => {
     dispatch(productsFetch());
   }, []);
@@ -30,7 +33,9 @@ const Home = () => {
               <span>{product.description}</span>
               <span className="price">${product.price}</span>
             </div>
-            <button onClick={()=>handelAddtoCart(product)}>Add To Cart</button>
+            <button onClick={() => handelAddtoCart(product)}>
+              Add To Cart
+            </button>
           </div>
         ))}
       </div>

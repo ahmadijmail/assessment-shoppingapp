@@ -1,21 +1,32 @@
 import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import 'react-toastify/dist/ReactToastify.css'
-import {ToastContainer} from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Cart from "./components/Cart/Cart";
 import Notfound from "./components/PageNotFound/Notfound";
+import Register from "./components/authentication/register";
+import {authactions} from "./store/authenticationSlice";
+import {  useDispatch } from "react-redux";
+
+import Login from "./components/authentication/login";
 function App() {
+  const dispatch = useDispatch();
+
+
+  dispatch(authactions.loadUserData())
   return (
     <div className="App">
       <BrowserRouter>
-      <ToastContainer/>
+        <ToastContainer />
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="*" element={<Notfound />} />
         </Routes>
       </BrowserRouter>
