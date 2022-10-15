@@ -108,28 +108,46 @@ const EditProduct = () => {
 export default EditProduct;
 
 const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  margin-top: 2rem;
+display: flex;
+flex-direction: column;
+max-width: 300px;
+margin-top: 2rem;
 
-  select,
-  input {
-    padding: 7px;
-    min-height: 30px;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid rgb(182, 182, 182);
-    margin: 0.3rem 0;
+height: 475px;
+select,
+input {
+  padding: 7px;
+  min-height: 35px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid rgb(182, 182, 182);
+  margin: 0.3rem 0;
 
-    &:focus {
-      border: 2px solid rgb(0, 208, 255);
-    }
+  &:focus {
+    border: 2px solid rgb(0, 208, 255);
   }
+}
+h3{
 
-  select {
-    color: rgb(95, 95, 95);
-  }
+margin-bottom:50px;
+}
+button{
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 1rem;
+  font-weight: 400;
+  letter-spacing: 1.15px;
+  background-color: #4b70e2;
+  color: #f9f9f9;
+  border: none;
+  outline: none;
+  cursor: pointer;
+ margin-right: 5px;
+}
+select {
+  color: rgb(95, 95, 95);
+}
 `;
 
 const StyledCreateProduct = styled.div`

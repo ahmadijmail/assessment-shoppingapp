@@ -31,18 +31,21 @@ const Register = () => {
 
         <input
           type="text"
+          placeholder="Name"
           onChange={(e) => {
             setUserData({ ...userData, name: e.target.value });
           }}
         />
         <input
           type="text"
+          placeholder="Email"
           onChange={(e) => {
             setUserData({ ...userData, email: e.target.value });
           }}
         />
         <input
           type="password"
+          placeholder="Password"
           onChange={(e) => {
             setUserData({ ...userData, password: e.target.value });
           }}
