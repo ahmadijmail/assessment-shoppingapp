@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { productsFetch } from "../../store/productSlices";
 import { useSelector, useDispatch } from "react-redux";
-import { cartActions } from "../../store/cartSlice";
-import { editProduct } from "../../store/productSlices";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../store/productSlices";
 
@@ -12,12 +10,11 @@ const MyProducts = () => {
   const datas = useSelector((data) => data.products.items);
   const auth = useSelector((data) => data.auth);
   const filtered = datas.filter((data) => data.userid == auth.id);
-  
-useEffect(()=>{
-  dispatch(productsFetch());
-}, [filtered])
 
-  
+  useEffect(() => {
+    dispatch(productsFetch());
+  }, [filtered]);
+
   return (
     <>
       <div className="myproducts">
@@ -30,16 +27,19 @@ useEffect(()=>{
               style={{ height: "150px", width: "150px" }}
             />
             <div className="details">
-              <span>{product.description}</span>
+              <span className="description">{product.description}</span>
               <span className="price">${product.price}</span>
             </div>
             <div className="buttons">
-            <Link to={`/addproduct/${product._id}`}>
-              <button >
-                Edit Product
-              </button>
+              <Link to={`/addproduct/${product._id}`}>
+                <button>Edit Product</button>
               </Link>
-              <button id="deletB" onClick={()=>dispatch(deleteProduct(product._id)) }>Delete</button>
+              <button
+                id="deletB"
+                onClick={() => dispatch(deleteProduct(product._id))}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}

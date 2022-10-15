@@ -1,34 +1,25 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { productsFetch } from "../../store/productSlices";
-import { authactions } from "../../store/authenticationSlice";
-
-
 import { editProduct } from "../../store/productSlices";
 
 const EditProduct = () => {
   let { id } = useParams();
-
+  const dispatch = useDispatch();
   const loginStatus = useSelector((state) => state.auth);
   const datas = useSelector((data) => data.products.items);
   const filtered = datas.filter((data) => data._id == id);
-  console.log(filtered);
-  const dispatch = useDispatch();
 
   const [productImg, setProductImg] = useState(filtered[0]?.image.url);
   const [name, setName] = useState(filtered[0]?.name);
   const [price, setPrice] = useState(filtered[0]?.price);
   const [description, setDesc] = useState(filtered[0]?.description);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(productsFetch());
-  }, [id])
-
-
-
+  }, [id]);
 
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];

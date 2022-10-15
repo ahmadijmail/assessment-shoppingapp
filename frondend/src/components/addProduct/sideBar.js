@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Outlet, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 const Dashboard = () => {
-  const auth = useSelector((state) => state.auth);
+
   return (
     <StyledDashboard>
       <SideNav>
@@ -36,7 +36,6 @@ export default Dashboard;
 
 const StyledDashboard = styled.div`
   display: flex;
-  
 `;
 
 const SideNav = styled.div`

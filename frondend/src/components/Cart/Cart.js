@@ -4,28 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./cart.scss";
 import { cartActions } from "../../store/cartSlice";
-import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
-
   const dispatch = useDispatch();
-  useEffect(()=>{
-    
-  }, [cart])
-  
-  // useEffect(() => {
-  //   dispatch(getTotals());
-  // }, [cart, dispatch]);
-
-  const handleRemoveFromCart = (product) => {
-    dispatch(cartActions.removeFromCart(product));
-  };
   const handleClearCart = () => {
     dispatch(cartActions.clearCart());
   };
 
-  console.log(cart);
+
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
@@ -68,9 +55,6 @@ function Cart() {
                     <div>
                       <h3>{cartItem.name}</h3>
                       <p>{cartItem.description}</p>
-                      <button onClick={() => handleRemoveFromCart(cartItem)}>
-                        Remove
-                      </button>
                     </div>
                   </div>
                   <div className="cart-product-price">${cartItem.price}</div>

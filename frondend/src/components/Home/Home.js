@@ -15,9 +15,9 @@ const Home = () => {
     dispatch(cartActions.addtoCart(product));
   };
 
-  // useEffect(() => {
-  //   dispatch(productsFetch());
-  // }, []);
+  useEffect(() => {
+    dispatch(productsFetch());
+  }, [datas]);
   //console.log(datas);
   return (
     <>
@@ -25,9 +25,9 @@ const Home = () => {
         {datas?.map((product) => (
          
             <div key={product._id} className="product">
-             
-              <h3>{product.name}</h3>
               <StyledLink to={`/home/${product._id}`}  >
+              <h3>{product.name}</h3>
+             
               <img
                 src={product.image.url}
                 alt={product.name}
@@ -37,7 +37,7 @@ const Home = () => {
 
              <StyledLink to={`/home/${product._id}`}  >
               <div className="details">
-                <span>{product.description}</span>
+                <span className="description">{product.description}</span>
                 <span className="price">${product.price}</span>
               </div>
               </StyledLink>

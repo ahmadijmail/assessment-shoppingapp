@@ -85,9 +85,6 @@ const navigate =useNavigate()
             required
           />
           <button>submit</button>
-          {/* <PrimaryButton type="submit">
-          {createStatus === "pending" ? "Submitting" : "Submit"}
-        </PrimaryButton> */}
         </StyledForm>
         <ImagePreview>
           {productImg ? (

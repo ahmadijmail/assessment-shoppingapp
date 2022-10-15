@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./product.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -15,9 +15,9 @@ const Product = () => {
     dispatch(cartActions.addtoCart(product));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(productsFetch());
-  }, [data])
+  }, [data]);
   console.log(data);
   return (
     <>
