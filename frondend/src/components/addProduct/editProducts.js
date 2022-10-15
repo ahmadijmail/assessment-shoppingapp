@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { productsFetch } from "../../store/productSlices";
 import { authactions } from "../../store/authenticationSlice";
 
+
 import { editProduct } from "../../store/productSlices";
 
 const EditProduct = () => {
@@ -14,7 +15,7 @@ const EditProduct = () => {
   const loginStatus = useSelector((state) => state.auth);
   const datas = useSelector((data) => data.products.items);
   const filtered = datas.filter((data) => data._id == id);
-console.log(filtered);
+  console.log(filtered);
   const dispatch = useDispatch();
 
   const [productImg, setProductImg] = useState(filtered[0]?.image.url);
@@ -22,12 +23,18 @@ console.log(filtered);
   const [price, setPrice] = useState(filtered[0]?.price);
   const [description, setDesc] = useState(filtered[0]?.description);
 
+  useEffect(()=>{
+    dispatch(productsFetch());
+  }, [id])
+
+
+
+
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
 
     TransformFileData(file);
   };
-
 
   const TransformFileData = (file) => {
     const reader = new FileReader();
@@ -46,12 +53,12 @@ console.log(filtered);
     e.preventDefault();
 
     dispatch(
-        editProduct({
+      editProduct({
         name,
         description,
         price,
         image: productImg,
-        id:id,
+        id: id,
         userid: loginStatus.id,
       })
     );

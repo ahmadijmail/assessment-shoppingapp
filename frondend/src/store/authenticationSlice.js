@@ -1,19 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+let url = "https://assessment-agentsocloud.herokuapp.com";
 
 export const registerUser = createAsyncThunk(
   "authentication/registerUser",
   async (userInput, { rejectWithValue }) => {
     try {
-      const TokenFromApi = await axios.post(
-        "http://localhost:5000/api/register",
-        {
-          name: userInput.name,
-          email: userInput.email,
-          password: userInput.password,
-        }
-      );
+      const TokenFromApi = await axios.post(`${url}/api/register`, {
+        name: userInput.name,
+        email: userInput.email,
+        password: userInput.password,
+      });
       console.log(TokenFromApi.data, "tokkk");
       localStorage.setItem("token", TokenFromApi.data);
       return TokenFromApi;
@@ -28,7 +26,7 @@ export const loginUser = createAsyncThunk(
   "authentication/loginUser",
   async (userInput, { rejectWithValue }) => {
     try {
-      const TokenFromApi = await axios.post("http://localhost:5000/api/login", {
+      const TokenFromApi = await axios.post(`${url}/api/login`, {
         email: userInput.email,
         password: userInput.password,
       });

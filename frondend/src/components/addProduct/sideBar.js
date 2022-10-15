@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <StyledDashboard>
       <SideNav>
-        <h3>Quick Links</h3>
+        <h3>Dashboard</h3>
         <NavLink
           className={({ isActive }) =>
             isActive ? "link-active" : "link-inactive"
@@ -41,10 +41,10 @@ const StyledDashboard = styled.div`
 
 const SideNav = styled.div`
   border-right: 1px solid gray;
-  height: calc(100vh - 70px);
-  position: fixed;
+  height: 100%
+  position: sticky;
   overflow-y: auto;
-  width: 200px;
+  width: 20%;
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -62,7 +62,7 @@ const SideNav = styled.div`
 `;
 
 const Content = styled.div`
-  margin-left: 200px;
+  margin-left: 30px;
   padding: 2rem 3rem;
   width: 100%;
 `;

@@ -13,14 +13,11 @@ const MyProducts = () => {
   const auth = useSelector((data) => data.auth);
   const filtered = datas.filter((data) => data.userid == auth.id);
   
-  const handelEditItem = (product) => {
-    dispatch(editProduct(product));
-  };
+useEffect(()=>{
+  dispatch(productsFetch());
+}, [filtered])
 
-//   useEffect(() => {
-//     dispatch(productsFetch());
-//   }, []);
-//   console.log(datas);
+  
   return (
     <>
       <div className="myproducts">

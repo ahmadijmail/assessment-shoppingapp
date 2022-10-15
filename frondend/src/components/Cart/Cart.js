@@ -1,21 +1,22 @@
-import React from 'react'
+import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import './cart.scss'
-import {cartActions } from "../../store/cartSlice"
-import {useNavigate} from 'react-router-dom'
+import "./cart.scss";
+import { cartActions } from "../../store/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
-  const navigate =useNavigate()
-  
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    
+  }, [cart])
+  
   // useEffect(() => {
   //   dispatch(getTotals());
   // }, [cart, dispatch]);
-
 
   const handleRemoveFromCart = (product) => {
     dispatch(cartActions.removeFromCart(product));
@@ -28,7 +29,7 @@ function Cart() {
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
-      {cart?.cartlist.length==0? (
+      {cart?.cartlist.length == 0 ? (
         <div className="cart-empty">
           <p>Your cart is currently empty</p>
           <div className="start-shopping">
@@ -74,9 +75,7 @@ function Cart() {
                   </div>
                   <div className="cart-product-price">${cartItem.price}</div>
                   <div className="cart-product-quantity">
-                   
                     <div className="count">{cartItem.CartQuantity}</div>
-                   
                   </div>
                   <div className="cart-product-total-price">
                     ${cartItem.price * cartItem.CartQuantity}
@@ -118,7 +117,7 @@ function Cart() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

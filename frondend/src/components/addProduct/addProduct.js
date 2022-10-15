@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import {useNavigate} from 'react-router-dom'
 import styled from "styled-components";
 
 import { addProduct } from "../../store/productSlices";
 
 const AddProduct = () => {
   const loginStatus = useSelector((state) => state.auth);
-
+const navigate =useNavigate()
   const dispatch = useDispatch();
   const [productImg, setProductImg] = useState("");
   const [name, setName] = useState("");
@@ -19,6 +19,12 @@ const AddProduct = () => {
 
     TransformFileData(file);
   };
+
+  useEffect(() => {
+    if (addProduct.id) {
+      navigate("/addproduct/myproducts");
+    }
+  }, [addProduct.id]);
 
   const TransformFileData = (file) => {
     const reader = new FileReader();
@@ -105,10 +111,11 @@ const StyledForm = styled.form`
   max-width: 300px;
   margin-top: 2rem;
 
+ height: 475px;
   select,
   input {
     padding: 7px;
-    min-height: 30px;
+    min-height: 35px;
     outline: none;
     border-radius: 5px;
     border: 1px solid rgb(182, 182, 182);
@@ -118,7 +125,24 @@ const StyledForm = styled.form`
       border: 2px solid rgb(0, 208, 255);
     }
   }
-
+ h3{
+  
+  margin-bottom:50px;
+ }
+  button{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-weight: 400;
+    letter-spacing: 1.15px;
+    background-color: #4b70e2;
+    color: #f9f9f9;
+    border: none;
+    outline: none;
+    cursor: pointer;
+   margin-right: 5px;
+  }
   select {
     color: rgb(95, 95, 95);
   }

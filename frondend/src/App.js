@@ -15,7 +15,7 @@ import Login from "./components/authentication/login";
 import MyProducts from "./components/addProduct/myProducts";
 import Dashboard from "./components/addProduct/sideBar";
 import { productsFetch } from "./store/productSlices";
-
+import Product from "./components/addProduct/product";
 import EditProduct from "./components/addProduct/editProducts";
 import { useEffect } from "react";
 
@@ -25,7 +25,6 @@ function App() {
   dispatch(authactions.loadUserData());
   dispatch(productsFetch());
 
-  
   return (
     <div className="App">
       <BrowserRouter>
@@ -36,11 +35,12 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="home/:id" element={<Product />} />
           <Route path="/addproduct" element={<Dashboard />}>
             <Route path="add" element={<AddProduct />} />
             <Route path="myproducts" element={<MyProducts />} />
             <Route path=":id" element={<EditProduct />} />
-            
+           
           </Route>
           <Route path="*" element={<Notfound />} />
         </Routes>

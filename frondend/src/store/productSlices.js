@@ -1,10 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import { toast } from "react-toastify";
+
+let url = "https://assessment-agentsocloud.herokuapp.com";
 export const productsFetch = createAsyncThunk(
   "products/productsFetch",
   async () => {
-    const response = await axios.get("http://localhost:5000/api/products");
-    console.log(response.data, "Slice");
+    const response = await axios.get(`${url}/api/products`);
+    // console.log(response.data, "Slice");
     return response?.data;
   }
 );
@@ -14,11 +19,10 @@ export const addProduct = createAsyncThunk(
   async (userInput, { rejectWithValue }) => {
     console.log(userInput, "userinput");
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/products",
-        userInput
-      );
-
+      const response = await axios.post(`${url}/api/products`, userInput);
+      toast.success(`${userInput.name} Product Added to DB`, {
+        position: "bottom-left",
+      });
       return response.data;
     } catch (e) {
       console.log(e.response.data);
@@ -28,18 +32,18 @@ export const addProduct = createAsyncThunk(
 );
 
 export const editProduct = createAsyncThunk(
-  "authentication/addProduct",
+  "authentication/editProduct",
   async (userInput, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/products/${userInput.id}`,
-        { name:userInput.name,
-          description:userInput.description,
-          price:userInput.price,
-          image: userInput.image,
-         }
-      );
-
+      const response = await axios.put(`${url}/api/products/${userInput.id}`, {
+        name: userInput.name,
+        description: userInput.description,
+        price: userInput.price,
+        image: userInput.image,
+      });
+      toast.success(`${userInput.name} Successfully updated`, {
+        position: "bottom-left",
+      });
       return response.data;
     } catch (e) {
       console.log(e.response.data);
@@ -48,16 +52,13 @@ export const editProduct = createAsyncThunk(
   }
 );
 
-
 export const deleteProduct = createAsyncThunk(
-  "authentication/addProduct",
+  "authentication/deleteProduct",
   async (id, { rejectWithValue }) => {
     console.log(id, "iddd");
     try {
-      const response = await axios.delete(
-        `http://localhost:5000/api/products/${id}`
-      );
-
+      const response = await axios.delete(`${url}/api/products/${id}`);
+      toast.success(`${id} Successfully Deleted`, { position: "bottom-left" });
       return response.data;
     } catch (e) {
       console.log(e.response.data);

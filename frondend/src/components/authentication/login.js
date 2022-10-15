@@ -39,7 +39,7 @@ const Login = () => {
             setUserData({ ...userData, password: e.target.value });
           }}
         />
-        <button>Register</button>
+        <button>Login</button>
 
         {datafromApi.LoginStatus =="rejected"? <p>
         {datafromApi.LoginError} 

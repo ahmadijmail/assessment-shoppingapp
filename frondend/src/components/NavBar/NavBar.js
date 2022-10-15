@@ -27,12 +27,27 @@ function NavBar() {
       <Link to="/">
         <h2>Shop</h2>
       </Link>
+      <>
+        {loginStatus?.id ? (
+          <Routing>
+            <Link to="/addproduct/myproducts">Dashboard</Link>
+            <div onClick={handelLogOut}>Logout</div>
+          </Routing>
+        ) : (
+          <div className="signOut">
+            <Link to="/login">Login</Link>
+            <Link to="/register" className="b1">
+              SignUp
+            </Link>
+          </div>
+        )}
+ 
       <Link to="/cart">
         <div className="navbag">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="35"
-            height="35"
+            width="30"
+            height="30"
             fill="currentColor"
             className="bi bi-cart"
             viewBox="0 0 16 16"
@@ -45,18 +60,7 @@ function NavBar() {
           </span>
         </div>
       </Link>
-
-      {loginStatus?.id ? (
-        <Routing>
-          <Link to="/addproduct">Sell</Link>
-          <div onClick={handelLogOut}>Logout</div>
-        </Routing>
-      ) : (
-        <AuthLi>
-          <Link to="/login">Login</Link>
-          <Link to="/register">SignUp</Link>
-        </AuthLi>
-      )}
+      </>
     </nav>
   );
 }
@@ -80,10 +84,12 @@ const Logout = styled.button`
 const Routing = styled.div`
   color: white;
   display: flex;
+  margin-left: 72%;
+
   div {
     cursor: pointer;
     &:last-child {
-      margin-left: 2rem;
+      margin-left:10px;
     }
   }
 `;
