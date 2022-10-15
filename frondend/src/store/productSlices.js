@@ -14,6 +14,8 @@ export const productsFetch = createAsyncThunk(
   }
 );
 
+
+
 export const addProduct = createAsyncThunk(
   "authentication/addProduct",
   async (userInput, { rejectWithValue }) => {
@@ -57,8 +59,8 @@ export const deleteProduct = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     console.log(id, "iddd");
     try {
-      const response = await axios.delete(`${url}/api/products/${id}`);
-      toast.success(`${id} Successfully Deleted`, { position: "bottom-left" });
+      const response = await axios.delete(`${url}/api/products/${id.id}`);
+      toast.success(`${id.name} Successfully Deleted`, { position: "bottom-left" });
       return response.data;
     } catch (e) {
       console.log(e.response.data);

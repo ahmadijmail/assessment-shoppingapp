@@ -36,7 +36,7 @@ const MyProducts = () => {
               </Link>
               <button
                 id="deletB"
-                onClick={() => dispatch(deleteProduct(product._id))}
+                onClick={() => dispatch(deleteProduct({id:product._id,name:product.name }))}
               >
                 Delete
               </button>
