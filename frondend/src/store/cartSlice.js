@@ -53,6 +53,7 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartlist));
       localStorage.removeItem("cartnumbers");
       localStorage.removeItem("totalPrices");
+      window.location.reload();
     },
   },
 });

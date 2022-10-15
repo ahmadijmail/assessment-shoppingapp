@@ -25,6 +25,7 @@ const Dashboard = () => {
           My Products
         </NavLink>
       </SideNav>
+    
       <Content>
         <Outlet />
       </Content>
@@ -39,7 +40,8 @@ const StyledDashboard = styled.div`
 `;
 
 const SideNav = styled.div`
-  border-right: 1px solid gray;
+border-right: 2px solid gray;
+
   height: 100%
   position: sticky;
   overflow-y: auto;
@@ -47,6 +49,7 @@ const SideNav = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  
   h3 {
     margin: 0 0 1rem 0;
     padding: 0;
@@ -64,4 +67,6 @@ const Content = styled.div`
   margin-left: 30px;
   padding: 2rem 3rem;
   width: 100%;
+ 
 `;
+
