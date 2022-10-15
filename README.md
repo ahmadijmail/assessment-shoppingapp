@@ -15,6 +15,11 @@
 
 6. styled-components
 
+<br>
+
+## DB-ERD: 
+
+![](https://res.cloudinary.com/daah9umqu/image/upload/v1665826107/Screenshot_2022-10-15_122656_roboss.png)
 
 ## ScreenShots:
 
