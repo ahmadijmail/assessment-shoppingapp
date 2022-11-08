@@ -7,12 +7,12 @@ router.post("/", async (req, res) => {
   const { name, description, image, price, userid } = req.body;
 
   try {
-      console.log(image, "imgglinkk");
+      console.log(image, "imaaaageee");
     if (image) {
       const uploadres = await cloudinary.uploader.upload(image, {
         upload_preset: "liwdvkxq",
       });
-      console.log(uploadres, "imgglinkk");
+     // console.log(uploadres, "imgglinkk");
 
       if (uploadres) {
         const newproduct = new Product({
@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
           price,
           userid,
         });
-        console.log(newproduct);
+        //console.log(newproduct);
         const response = await newproduct.save();
         res.status(200).send(response);
       }
@@ -41,7 +41,7 @@ router.put("/:id", async (req, res) => {
       const uploadres = await cloudinary.uploader.upload(image, {
         upload_preset: "liwdvkxq",
       });
-      console.log(uploadres, "imgglinkk");
+      console.log(uploadres, "uppppp");
 
       if (uploadres) {
         let itemId = req.params.id;
