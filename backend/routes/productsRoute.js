@@ -5,9 +5,9 @@ const cloudinary = require("../assests/cloudinary");
 
 router.post("/", async (req, res) => {
   const { name, description, image, price, userid } = req.body;
-
+  console.log("bodyyyyy", req.body);
   try {
-      console.log(image, "imaaaageee");
+    
     if (image) {
       const uploadres = await cloudinary.uploader.upload(image, {
         upload_preset: "liwdvkxq",
