@@ -7,6 +7,7 @@ router.post("/", async (req, res) => {
   const { name, description, image, price, userid } = req.body;
 
   try {
+      console.log(image, "imgglinkk");
     if (image) {
       const uploadres = await cloudinary.uploader.upload(image, {
         upload_preset: "liwdvkxq",
